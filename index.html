@@ -210,8 +210,19 @@ function init() {
     list.innerHTML = '';
     let lastCat = '';
 
-    storage.sort((a, b) => {
-        return categoryOrder.indexOf(a.cat) - categoryOrder.indexOf(b.cat);
+    // GitHub'daki index.html dosyanızın içindeki şu kısmı bulun ve bununla değiştirin:
+// Eski: storage.sort((a, b) => categoryOrder.indexOf(a.cat) - categoryOrder.indexOf(b.cat));
+// Yeni (Daha uyumlu):
+storage.sort(function(a, b) {
+    return categoryOrder.indexOf(a.cat) - categoryOrder.indexOf(b.cat);
+});
+
+// Eski: storage.forEach((item, i) => { ... });
+// Yeni (Daha uyumlu):
+for (var i = 0; i < storage.length; i++) {
+    var item = storage[i];
+    // ... (diğer kodlar aynı kalacak şekilde döngü yapısı)
+}
     });
 
     storage.forEach((item, i) => {
@@ -309,4 +320,5 @@ function exportExcel() {
 init();
 </script>
 </body>
+
 </html>
