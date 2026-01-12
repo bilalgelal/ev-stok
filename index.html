@@ -97,7 +97,7 @@
 </div>
 
 <script>
-// Kategorilerin sıralama düzeni
+// ES5 uyumlu JavaScript - iPhone 7 Plus ve eski cihazlar için özel olarak düzenlendi
 var categoryOrder = [
     "BAKLİYAT & MAKARNA", "YAĞLAR", "UN & ŞEKER", "KAHVALTILIK", "İÇECEK", "BAHARAT",
     "ÇAMAŞIR", "BULAŞIK", "MUTFAK & BANYO", "GENEL TEMİZLİK", "BANYO & HİJYEN",
@@ -106,7 +106,6 @@ var categoryOrder = [
     "BANYO & TUVALET", "MUTFAK & GENEL", "HİJYENİK KAĞITLAR", "YARDIMCI KAĞITLAR", "DİĞER"
 ];
 
-// Senin gönderdiğin varsayılan ürün listesi
 var defaultList = [
     { cat: "BAKLİYAT & MAKARNA", urun: "Pirinç", unit: "kg"},
     { cat: "BAKLİYAT & MAKARNA", urun: "Kırmızı Mercimek", unit: "kg" },
@@ -203,11 +202,11 @@ var defaultList = [
     { cat: "YARDIMCI KAĞITLAR", urun: "Streç Film", unit: "ad" }
 ];
 
-// LocalStorage'dan yükle veya default listeyi kullan
+// LocalStorage kontrolü
 var savedData = localStorage.getItem('evEnvanter_vFinal');
 var storage = savedData ? JSON.parse(savedData) : defaultList;
 
-// Veri yapısı eksikse (ilk açılış) default değerleri tamamla
+// Eksik verileri tamamla (ilk açılış için)
 for (var j = 0; j < storage.length; j++) {
     if (storage[j].qty === undefined) storage[j].qty = 0;
     if (storage[j].need === undefined) storage[j].need = false;
@@ -252,7 +251,7 @@ function addNewProduct() {
     var cat = document.getElementById('newCat').value;
     var unit = document.getElementById('newUnit').value || 'ad';
     
-    if (!name.trim()) { alert("Lütfen ürün adı girin!"); return; }
+    if (!name || name.trim() === "") { alert("Lütfen ürün adı girin!"); return; }
 
     storage.push({ cat: cat, urun: name, unit: unit, qty: 0, need: false });
     save();
@@ -319,11 +318,11 @@ function copyText() {
     dummy.select();
     document.execCommand("copy");
     document.body.removeChild(dummy);
-    alert("Eksik listesi kopyalandı! WhatsApp'a yapıştırabilirsin.");
+    alert("Eksik listesi kopyalandı!");
 }
 
 function exportExcel() {
-    var csv = "Kategori\tÜrün\tMiktar\tBirim\tİhtiyaç Durumu\n";
+    var csv = "Kategori\tÜrün\tMiktar\tBirim\tDurum\n";
     for (var i = 0; i < storage.length; i++) {
         var m = storage[i];
         csv += m.cat + "\t" + m.urun + "\t" + m.qty + "\t" + m.unit + "\t" + (m.need ? 'EKSİK' : 'TAMAM') + "\n";
