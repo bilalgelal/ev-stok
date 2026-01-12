@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ev Stok & Envanter Yönetimi</title>
+    <title>Ev Stok Yönetimi</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
     <style>
         :root { --primary: #2563eb; --success: #16a34a; --danger: #dc2626; --bg: #f8fafc; --warning: #f59e0b; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); padding: 10px; color: #1e293b; margin: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); padding: 10px; color: #1e293b; margin: 0; }
         .container { max-width: 900px; margin: auto; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        
         .add-panel { background: #eff6ff; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #dbeafe; display: flex; gap: 8px; flex-wrap: wrap; }
-        .add-panel input, .add-panel select { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; flex: 1; min-width: 130px; }
-        .btn-add { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-
-        .search-bar { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; margin-bottom: 10px; }
-        
+        .add-panel input, .add-panel select { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; flex: 1; min-width: 130px; font-size: 16px; }
+        .btn-add { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 5px; }
+        .search-bar { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; margin-bottom: 10px; font-size: 16px; }
         table { width: 100%; border-collapse: collapse; }
         th { background: #f1f5f9; padding: 12px; text-align: left; font-size: 12px; position: sticky; top: 0; z-index: 10; }
         td { padding: 10px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
         .cat-header { background: #f1f5f9 !important; font-weight: bold; color: var(--primary); border-left: 4px solid var(--primary); }
-        
-        input[type="number"] { width: 55px; padding: 5px; border: 1px solid #cbd5e1; border-radius: 4px; text-align: center; }
-        .status-btn { padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; display: inline-block; min-width: 120px; text-align: center; }
-        .need-yes { background: #fee2e2; color: var(--danger); border: 1px solid var(--danger); }
-        .need-no { background: #dcfce7; color: var(--success); border: 1px solid var(--success); }
-        
-        .delete-btn { color: var(--danger); cursor: pointer; font-weight: bold; margin-left: 10px; border: none; background: none; font-size: 16px; }
+        input[type="number"] { width: 50px; padding: 5px; border: 1px solid #cbd5e1; border-radius: 4px; text-align: center; font-size: 14px; }
+        .status-btn { padding: 8px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; display: inline-block; min-width: 110px; text-align: center; border: 1px solid transparent; }
+        .need-yes { background: #fee2e2; color: var(--danger); border-color: var(--danger); }
+        .need-no { background: #dcfce7; color: var(--success); border-color: var(--success); }
+        .delete-btn { color: var(--danger); cursor: pointer; font-weight: bold; border: none; background: none; font-size: 18px; }
         .footer-btns { position: sticky; bottom: 0; background: white; padding: 15px; display: flex; justify-content: center; gap: 10px; border-top: 1px solid #e2e8f0; }
-        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; color: white; }
-        
+        .btn { padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; color: white; flex: 1; }
         #modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 25px; border-radius: 15px; box-shadow: 0 0 30px rgba(0,0,0,0.4); z-index: 1000; width: 85%; max-width: 400px; }
         #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; }
     </style>
@@ -39,7 +37,7 @@
     <h2 style="text-align: center; color: var(--primary);">🏠 Ev Stok Yönetimi</h2>
 
     <div class="add-panel">
-        <input type="text" id="newUrun" placeholder="Ürün Adı...">
+        <input type="text" id="newUrun" placeholder="Yeni Ürün Adı...">
         <select id="newCat">
             <option value="BAKLİYAT & MAKARNA">BAKLİYAT & MAKARNA</option>
             <option value="YAĞLAR">YAĞLAR</option>
@@ -66,19 +64,19 @@
             <option value="YARDIMCI KAĞITLAR">YARDIMCI KAĞITLAR</option>
             <option value="DİĞER">DİĞER</option>
         </select>
-        <input type="text" id="newUnit" placeholder="Birim..." style="max-width: 80px;">
-        <button class="btn-add" onclick="addNewProduct()">➕ EKLE</button>
+        <input type="text" id="newUnit" placeholder="Birim (kg, ad...)">
+        <button class="btn-add" onclick="addNewProduct()">➕ LİSTEYE EKLE</button>
     </div>
 
     <input type="text" id="searchInput" class="search-bar" placeholder="Ürünlerde ara..." onkeyup="filterProducts()">
 
-    <table>
+    <table id="productTable">
         <thead>
             <tr>
                 <th>Ürün</th>
                 <th>Birim</th>
                 <th>Miktar</th>
-                <th>İhtiyaç Durumu</th>
+                <th>İhtiyaç</th>
             </tr>
         </thead>
         <tbody id="listBody"></tbody>
@@ -93,13 +91,14 @@
 <div id="overlay" onclick="closeModal()"></div>
 <div id="modal">
     <h3>🛒 Alınacaklar</h3>
-    <div id="modal-content" style="white-space: pre-wrap; margin-bottom: 15px; max-height: 200px; overflow-y: auto;"></div>
-    <button class="btn" style="width: 100%; background: var(--primary);" onclick="copyText()">📋 KOPYALA</button>
-    <button class="btn" style="width: 100%; background: #666; margin-top: 5px;" onclick="closeModal()">KAPAT</button>
+    <div id="modal-content" style="white-space: pre-wrap; margin-bottom: 15px; max-height: 250px; overflow-y: auto; font-size: 15px;"></div>
+    <button class="btn" style="width: 100%; background: var(--primary); margin-bottom: 5px;" onclick="copyText()">📋 KOPYALA</button>
+    <button class="btn" style="width: 100%; background: #666;" onclick="closeModal()">KAPAT</button>
 </div>
 
 <script>
-const categoryOrder = [
+// Kategorilerin sıralama düzeni
+var categoryOrder = [
     "BAKLİYAT & MAKARNA", "YAĞLAR", "UN & ŞEKER", "KAHVALTILIK", "İÇECEK", "BAHARAT",
     "ÇAMAŞIR", "BULAŞIK", "MUTFAK & BANYO", "GENEL TEMİZLİK", "BANYO & HİJYEN",
     "AĞIZ BAKIMI", "KADIN HİJYEN", "EL, YÜZ & VÜCUT", "DEODORANT & PARFÜM",
@@ -107,7 +106,8 @@ const categoryOrder = [
     "BANYO & TUVALET", "MUTFAK & GENEL", "HİJYENİK KAĞITLAR", "YARDIMCI KAĞITLAR", "DİĞER"
 ];
 
-const defaultData = [
+// Senin gönderdiğin varsayılan ürün listesi
+var defaultList = [
     { cat: "BAKLİYAT & MAKARNA", urun: "Pirinç", unit: "kg"},
     { cat: "BAKLİYAT & MAKARNA", urun: "Kırmızı Mercimek", unit: "kg" },
     { cat: "BAKLİYAT & MAKARNA", urun: "Nohut", unit: "kg"},
@@ -203,97 +203,105 @@ const defaultData = [
     { cat: "YARDIMCI KAĞITLAR", urun: "Streç Film", unit: "ad" }
 ];
 
-let storage = JSON.parse(localStorage.getItem('evEnvanter_vFinal')) || defaultData.map(p => ({...p, qty: 0, need: false, custom: false}));
+// LocalStorage'dan yükle veya default listeyi kullan
+var savedData = localStorage.getItem('evEnvanter_vFinal');
+var storage = savedData ? JSON.parse(savedData) : defaultList;
+
+// Veri yapısı eksikse (ilk açılış) default değerleri tamamla
+for (var j = 0; j < storage.length; j++) {
+    if (storage[j].qty === undefined) storage[j].qty = 0;
+    if (storage[j].need === undefined) storage[j].need = false;
+}
 
 function init() {
-    const list = document.getElementById('listBody');
+    var list = document.getElementById('listBody');
     list.innerHTML = '';
-    let lastCat = '';
+    var lastCat = '';
 
-    // GitHub'daki index.html dosyanızın içindeki şu kısmı bulun ve bununla değiştirin:
-// Eski: storage.sort((a, b) => categoryOrder.indexOf(a.cat) - categoryOrder.indexOf(b.cat));
-// Yeni (Daha uyumlu):
-storage.sort(function(a, b) {
-    return categoryOrder.indexOf(a.cat) - categoryOrder.indexOf(b.cat);
-});
-
-// Eski: storage.forEach((item, i) => { ... });
-// Yeni (Daha uyumlu):
-for (var i = 0; i < storage.length; i++) {
-    var item = storage[i];
-    // ... (diğer kodlar aynı kalacak şekilde döngü yapısı)
-}
+    // Kategorilere göre sırala
+    storage.sort(function(a, b) {
+        return categoryOrder.indexOf(a.cat) - categoryOrder.indexOf(b.cat);
     });
 
-    storage.forEach((item, i) => {
-        if(item.cat !== lastCat) {
-            const catRow = document.createElement('tr');
+    for (var i = 0; i < storage.length; i++) {
+        var item = storage[i];
+        
+        if (item.cat !== lastCat) {
+            var catRow = document.createElement('tr');
             catRow.className = 'cat-header';
-            catRow.innerHTML = `<td colspan="4">${item.cat}</td>`;
+            catRow.innerHTML = '<td colspan="4">' + item.cat + '</td>';
             list.appendChild(catRow);
             lastCat = item.cat;
         }
 
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>
-                ${item.urun} 
-                ${item.custom ? `<button class="delete-btn" onclick="deleteProduct(${i})">🗑️</button>` : ''}
-            </td>
-            <td>${item.unit}</td>
-            <td><input type="number" step="0.1" value="${item.qty}" oninput="update(${i}, 'qty', this.value)"></td>
-            <td>
-                <span class="status-btn ${item.need ? 'need-yes' : 'need-no'}" onclick="update(${i}, 'need', !storage[${i}].need)">
-                    ${item.need ? '⚠️ İHTİYAÇ VAR' : '✅ İHTİYAÇ DEĞİL'}
-                </span>
-            </td>
-        `;
+        var row = document.createElement('tr');
+        var statusText = item.need ? '⚠️ İHTİYAÇ VAR' : '✅ İHTİYAÇ DEĞİL';
+        var statusClass = item.need ? 'need-yes' : 'need-no';
+        
+        row.innerHTML = '<td>' + item.urun + 
+            ' <button class="delete-btn" onclick="deleteProduct(' + i + ')">🗑️</button></td>' +
+            '<td>' + item.unit + '</td>' +
+            '<td><input type="number" step="0.1" value="' + item.qty + '" oninput="update(' + i + ', \'qty\', this.value)"></td>' +
+            '<td><span class="status-btn ' + statusClass + '" onclick="update(' + i + ', \'need\', ' + !item.need + ')">' + statusText + '</span></td>';
         list.appendChild(row);
-    });
+    }
 }
 
 function addNewProduct() {
-    const name = document.getElementById('newUrun').value.trim();
-    const cat = document.getElementById('newCat').value;
-    const unit = document.getElementById('newUnit').value || 'ad';
+    var name = document.getElementById('newUrun').value;
+    var cat = document.getElementById('newCat').value;
+    var unit = document.getElementById('newUnit').value || 'ad';
+    
+    if (!name.trim()) { alert("Lütfen ürün adı girin!"); return; }
 
-    if(!name) { alert("Ürün adı boş olamaz!"); return; }
-
-    storage.push({ cat, urun: name, unit, qty: 0, need: false, custom: true });
+    storage.push({ cat: cat, urun: name, unit: unit, qty: 0, need: false });
     save();
     document.getElementById('newUrun').value = '';
     init();
 }
 
 function update(i, key, val) {
-    storage[i][key] = (key === 'qty') ? (parseFloat(val) || 0) : val;
+    if (key === 'qty') {
+        storage[i][key] = parseFloat(val) || 0;
+    } else {
+        storage[i][key] = val;
+    }
     save();
-    if(key === 'need') init(); 
+    if (key === 'need') init(); 
 }
 
 function deleteProduct(i) {
-    if(confirm("Bu ürünü silmek istediğine emin misin?")) {
+    if (confirm(storage[i].urun + " silinsin mi?")) {
         storage.splice(i, 1);
         save();
         init();
     }
 }
 
-function save() { localStorage.setItem('evEnvanter_vFinal', JSON.stringify(storage)); }
+function save() {
+    localStorage.setItem('evEnvanter_vFinal', JSON.stringify(storage));
+}
 
 function filterProducts() {
-    const term = document.getElementById('searchInput').value.toLowerCase();
-    document.querySelectorAll('#listBody tr').forEach(row => {
-        if(!row.classList.contains('cat-header')) {
-            row.style.display = row.innerText.toLowerCase().includes(term) ? '' : 'none';
+    var term = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.getElementById('listBody').getElementsByTagName('tr');
+    for (var i = 0; i < rows.length; i++) {
+        if (!rows[i].classList.contains('cat-header')) {
+            rows[i].style.display = rows[i].innerText.toLowerCase().indexOf(term) > -1 ? '' : 'none';
         }
-    });
+    }
 }
 
 function showMissing() {
-    const missing = storage.filter(item => item.need);
-    const content = document.getElementById('modal-content');
-    content.innerText = missing.length ? missing.map(m => `• ${m.urun} (Eldeki: ${m.qty} ${m.unit})`).join('\n') : "Eksik yok!";
+    var missingText = "";
+    var count = 0;
+    for (var i = 0; i < storage.length; i++) {
+        if (storage[i].need) {
+            count++;
+            missingText += count + ". " + storage[i].urun + " (" + storage[i].qty + " " + storage[i].unit + " elinizde var)\n";
+        }
+    }
+    document.getElementById('modal-content').innerText = missingText || "Harika! Hiç eksik ürünün yok.";
     document.getElementById('modal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
 }
@@ -304,21 +312,30 @@ function closeModal() {
 }
 
 function copyText() {
-    navigator.clipboard.writeText(document.getElementById('modal-content').innerText).then(() => alert("Kopyalandı!"));
+    var text = document.getElementById('modal-content').innerText;
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    alert("Eksik listesi kopyalandı! WhatsApp'a yapıştırabilirsin.");
 }
 
 function exportExcel() {
-    let csv = "Kategori\tÜrün\tMiktar\tBirim\tDurum\n";
-    storage.forEach(m => csv += `${m.cat}\t${m.urun}\t${m.qty}\t${m.unit}\t${m.need?'İHTİYAÇ VAR':'İHTİYAÇ YOK'}\n`);
-    const blob = new Blob(['\ufeff' + csv], { type: 'application/vnd.ms-excel' });
-    const a = document.createElement("a");
+    var csv = "Kategori\tÜrün\tMiktar\tBirim\tİhtiyaç Durumu\n";
+    for (var i = 0; i < storage.length; i++) {
+        var m = storage[i];
+        csv += m.cat + "\t" + m.urun + "\t" + m.qty + "\t" + m.unit + "\t" + (m.need ? 'EKSİK' : 'TAMAM') + "\n";
+    }
+    var blob = new Blob(['\ufeff' + csv], { type: 'application/vnd.ms-excel' });
+    var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "Stok_Listesi.xls";
+    a.download = "Ev_Stok_Listesi.xls";
     a.click();
 }
 
 init();
 </script>
 </body>
-
 </html>
