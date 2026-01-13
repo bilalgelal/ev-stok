@@ -3,41 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ev Stok Yönetimi</title>
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    
+    <title>Stok & Market Karşılaştırma Pro</title>
     <style>
-        :root { --primary: #2563eb; --success: #16a34a; --danger: #dc2626; --bg: #f8fafc; --warning: #f59e0b; }
+        :root { --primary: #2563eb; --success: #16a34a; --danger: #dc2626; --bg: #f8fafc; --warning: #f59e0b; --whatsapp: #25d366; --price: #7c3aed; --copy: #64748b; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); padding: 10px; color: #1e293b; margin: 0; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .container { max-width: 900px; margin: auto; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 90px; }
         .add-panel { background: #eff6ff; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #dbeafe; display: flex; gap: 8px; flex-wrap: wrap; }
         .add-panel input, .add-panel select { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; flex: 1; min-width: 130px; font-size: 16px; }
         .btn-add { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 5px; }
         .search-bar { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; margin-bottom: 10px; font-size: 16px; }
         table { width: 100%; border-collapse: collapse; }
-        th { background: #f1f5f9; padding: 12px; text-align: left; font-size: 12px; position: sticky; top: 0; z-index: 10; }
+        th { background: #f1f5f9; padding: 12px; text-align: left; font-size: 11px; position: sticky; top: 0; z-index: 10; }
         td { padding: 10px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
         .cat-header { background: #f1f5f9 !important; font-weight: bold; color: var(--primary); border-left: 4px solid var(--primary); }
         input[type="number"] { width: 50px; padding: 5px; border: 1px solid #cbd5e1; border-radius: 4px; text-align: center; font-size: 14px; }
-        .status-btn { padding: 8px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; display: inline-block; min-width: 110px; text-align: center; border: 1px solid transparent; }
+        .status-btn { padding: 8px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; display: inline-block; min-width: 105px; text-align: center; border: 1px solid transparent; }
         .need-yes { background: #fee2e2; color: var(--danger); border-color: var(--danger); }
         .need-no { background: #dcfce7; color: var(--success); border-color: var(--success); }
-        .delete-btn { color: var(--danger); cursor: pointer; font-weight: bold; border: none; background: none; font-size: 18px; }
-        .footer-btns { position: sticky; bottom: 0; background: white; padding: 15px; display: flex; justify-content: center; gap: 10px; border-top: 1px solid #e2e8f0; }
-        .btn { padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; color: white; flex: 1; }
-        #modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 25px; border-radius: 15px; box-shadow: 0 0 30px rgba(0,0,0,0.4); z-index: 1000; width: 85%; max-width: 400px; }
+        .delete-btn { color: var(--danger); cursor: pointer; border: none; background: none; font-size: 16px; margin-left: 5px; vertical-align: middle; }
+        .footer-btns { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 10px; display: flex; gap: 5px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 100; }
+        .btn { padding: 12px 5px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; color: white; flex: 1; font-size: 11px; text-align: center; }
+        #modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 15px; box-shadow: 0 0 30px rgba(0,0,0,0.4); z-index: 1000; width: 92%; max-width: 450px; }
         #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; }
+        .compare-row { padding: 12px 0; border-bottom: 1px solid #eee; }
+        .compare-product-name { font-weight: bold; display: block; margin-bottom: 8px; color: #333; }
+        .compare-links { display: flex; gap: 4px; flex-wrap: wrap; }
+        .compare-links a { font-size: 9px; padding: 6px 8px; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; min-width: 50px; text-align: center; }
+        .modal-action-btns { display: flex; gap: 10px; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2 style="text-align: center; color: var(--primary);">🏠 Ev Stok Yönetimi</h2>
+    <h2 style="text-align: center; color: var(--primary); font-size: 20px;">🏠 Stok & Market Listem</h2>
 
     <div class="add-panel">
-        <input type="text" id="newUrun" placeholder="Yeni Ürün Adı...">
+        <input type="text" id="newUrun" placeholder="Yeni Ürün...">
         <select id="newCat">
             <option value="BAKLİYAT & MAKARNA">BAKLİYAT & MAKARNA</option>
             <option value="YAĞLAR">YAĞLAR</option>
@@ -64,167 +65,52 @@
             <option value="YARDIMCI KAĞITLAR">YARDIMCI KAĞITLAR</option>
             <option value="DİĞER">DİĞER</option>
         </select>
-        <input type="text" id="newUnit" placeholder="Birim (kg, ad...)">
-        <button class="btn-add" onclick="addNewProduct()">➕ LİSTEYE EKLE</button>
+        <input type="text" id="newUnit" placeholder="Birim">
+        <button class="btn-add" onclick="addNewProduct()">➕ EKLE</button>
     </div>
 
-    <input type="text" id="searchInput" class="search-bar" placeholder="Ürünlerde ara..." onkeyup="filterProducts()">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Ürün ara..." onkeyup="filterProducts()">
 
     <table id="productTable">
         <thead>
-            <tr>
-                <th>Ürün</th>
-                <th>Birim</th>
-                <th>Miktar</th>
-                <th>İhtiyaç</th>
-            </tr>
+            <tr><th>Ürün</th><th>Birim</th><th>Miktar</th><th>İhtiyaç</th></tr>
         </thead>
         <tbody id="listBody"></tbody>
     </table>
 </div>
 
 <div class="footer-btns">
-    <button class="btn" style="background: var(--warning);" onclick="showMissing()">📝 EKSİK LİSTESİ</button>
+    <button class="btn" style="background: var(--warning);" onclick="showMissing()">📝 LİSTE</button>
+    <button class="btn" style="background: var(--price);" onclick="comparePrices()">💰 FİYAT ARA</button>
     <button class="btn" style="background: var(--success);" onclick="exportExcel()">📊 EXCEL</button>
 </div>
 
 <div id="overlay" onclick="closeModal()"></div>
 <div id="modal">
-    <h3>🛒 Alınacaklar</h3>
-    <div id="modal-content" style="white-space: pre-wrap; margin-bottom: 15px; max-height: 250px; overflow-y: auto; font-size: 15px;"></div>
-    <button class="btn" style="width: 100%; background: var(--primary); margin-bottom: 5px;" onclick="copyText()">📋 KOPYALA</button>
-    <button class="btn" style="width: 100%; background: #666;" onclick="closeModal()">KAPAT</button>
+    <h3 id="modal-title" style="margin-top:0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 18px;"></h3>
+    <div id="modal-content" style="max-height: 380px; overflow-y: auto; margin-top: 10px;"></div>
+    <div id="modal-footer-actions"></div>
+    <button class="btn" style="width: 100%; background: #666; margin-top: 15px; font-size: 14px;" onclick="closeModal()">KAPAT</button>
 </div>
 
 <script>
-// ES5 uyumlu JavaScript - iPhone 7 Plus ve eski cihazlar için özel olarak düzenlendi
-var categoryOrder = [
-    "BAKLİYAT & MAKARNA", "YAĞLAR", "UN & ŞEKER", "KAHVALTILIK", "İÇECEK", "BAHARAT",
-    "ÇAMAŞIR", "BULAŞIK", "MUTFAK & BANYO", "GENEL TEMİZLİK", "BANYO & HİJYEN",
-    "AĞIZ BAKIMI", "KADIN HİJYEN", "EL, YÜZ & VÜCUT", "DEODORANT & PARFÜM",
-    "SAÇ BAKIM & ŞEKİL", "KOZMETİK & MAKYAJ", "TIRAŞ ÜRÜNLERİ", "BEBEK",
-    "BANYO & TUVALET", "MUTFAK & GENEL", "HİJYENİK KAĞITLAR", "YARDIMCI KAĞITLAR", "DİĞER"
-];
+var categoryOrder = ["BAKLİYAT & MAKARNA", "YAĞLAR", "UN & ŞEKER", "KAHVALTILIK", "İÇECEK", "BAHARAT", "ÇAMAŞIR", "BULAŞIK", "MUTFAK & BANYO", "GENEL TEMİZLİK", "BANYO & HİJYEN", "AĞIZ BAKIMI", "KADIN HİJYEN", "EL, YÜZ & VÜCUT", "DEODORANT & PARFÜM", "SAÇ BAKIM & ŞEKİL", "KOZMETİK & MAKYAJ", "TIRAŞ ÜRÜNLERİ", "BEBEK", "BANYO & TUVALET", "MUTFAK & GENEL", "HİJYENİK KAĞITLAR", "YARDIMCI KAĞITLAR", "DİĞER"];
 
 var defaultList = [
-    { cat: "BAKLİYAT & MAKARNA", urun: "Pirinç", unit: "kg"},
-    { cat: "BAKLİYAT & MAKARNA", urun: "Kırmızı Mercimek", unit: "kg" },
-    { cat: "BAKLİYAT & MAKARNA", urun: "Nohut", unit: "kg"},
-    { cat: "BAKLİYAT & MAKARNA", urun: "Kuru Fasulye", unit: "kg" },
-    { cat: "BAKLİYAT & MAKARNA", urun: "Pilavlık Bulgur", unit: "kg" },
-    { cat: "BAKLİYAT & MAKARNA", urun: "Köftelik Bulgur", unit: "kg" },
-    { cat: "BAKLİYAT & MAKARNA", urun: "Makarna (Spagetti)", unit: "ad" },
-    { cat: "BAKLİYAT & MAKARNA", urun: "Makarna (Burgu/Fiyonk)", unit: "ad" },
-    { cat: "BAKLİYAT & MAKARNA", urun: "Arpa Şehriye", unit: "ad"},
-    { cat: "BAKLİYAT & MAKARNA", urun: "Tel Şehriye", unit: "ad" },
-    { cat: "BAKLİYAT & MAKARNA", urun: "Salça", unit: "kg" },
-    { cat: "YAĞLAR", urun: "Ayçiçek Yağı(5lt)", unit: "ad"},
-    { cat: "YAĞLAR", urun: "Ayçiçek Yağı(1lt)", unit: "ad" },
-    { cat: "YAĞLAR", urun: "Zeytinyağı", unit: "lt" },
-    { cat: "YAĞLAR", urun: "Tereyağı", unit: "ad" },
-    { cat: "UN & ŞEKER", urun: "Buğday Unu", unit: "ad/kg" },
-    { cat: "UN & ŞEKER", urun: "Mısır Unu", unit: "ad" },
-    { cat: "UN & ŞEKER", urun: "Nişasta", unit: "ad" },
-    { cat: "UN & ŞEKER", urun: "Toz Şeker", unit: "ad/kg" },
-    { cat: "KAHVALTILIK", urun: "Peynir Çeşitleri", unit: "ad" },
-    { cat: "KAHVALTILIK", urun: "Zeytin (S/Y)", unit: "ad" },
-    { cat: "KAHVALTILIK", urun: "Yumurta", unit: "ad" },
-    { cat: "İÇECEK", urun: "Siyah Çay(1kg)", unit: "ad" },
-    { cat: "İÇECEK", urun: "Türk Kahvesi", unit: "ad" },
-    { cat: "İÇECEK", urun: "Filtre Kahve", unit: "ad" },
-    { cat: "İÇECEK", urun: "Granül Kahve", unit: "ad" },
-    { cat: "İÇECEK", urun: "Sade Maden Suyu", unit: "ad" },
-    { cat: "İÇECEK", urun: "Meyveli Maden Suyu", unit: "ad" },
-    { cat: "BAHARAT", urun: "Tuz(öğütülmüş)", unit: "ad"},
-    { cat: "BAHARAT", urun: "Tuz(iri taneli)", unit: "ad" },
-    { cat: "BAHARAT", urun: "Karabiber", unit: "ad"},
-    { cat: "BAHARAT", urun: "Pul Biber", unit: "ad"},
-    { cat: "BAHARAT", urun: "Kekik / Nane", unit: "ad" },
-    { cat: "BAHARAT", urun: "Kimyon / Sumak", unit: "ad"},
-    { cat: "BAHARAT", urun: "Zencefil/Zerdeçal", unit: "ad"},
-    { cat: "BAHARAT", urun: "Tarçın", unit: "ad" },
-    { cat: "BAHARAT", urun: "Susam", unit: "ad" },
-    { cat: "BAHARAT", urun: "Karanfil", unit: "ad" },
-    { cat: "BAHARAT", urun: "Çörek otu", unit: "ad" },
-    { cat: "ÇAMAŞIR", urun: "Toz Deterjan", unit: "ad/kg" },
-    { cat: "ÇAMAŞIR", urun: "Sıvı Deterjan", unit: "ad/lt" },
-    { cat: "ÇAMAŞIR", urun: "Yumuşatıcı", unit: "ad/lt" },
-    { cat: "ÇAMAŞIR", urun: "Renkli Koruyucu", unit: "ad/lt" },
-    { cat: "ÇAMAŞIR", urun: "Çamaşır Suyu", unit: "ad"},
-    { cat: "ÇAMAŞIR", urun: "Makine Temizleyici", unit: "ad" },
-    { cat: "BULAŞIK", urun: "Elde Yıkama Sıvısı", unit: "ad" },
-    { cat: "BULAŞIK", urun: "Parlatıcı", unit: "ad" },
-    { cat: "BULAŞIK", urun: "Bulaşık Makinesi Tuzu", unit: "ad" },
-    { cat: "BULAŞIK", urun: "Makine Tableti", unit: "ad"},
-    { cat: "BULAŞIK", urun: "Mutfak Süngeri / Tel", unit: "ad" },
-    { cat: "MUTFAK & BANYO", urun: "Yağ Çözücü Sprey", unit: "ad" },
-    { cat: "MUTFAK & BANYO", urun: "Banyo Çözücü Sprey", unit: "ad" },
-    { cat: "MUTFAK & BANYO", urun: "Cif / Krem", unit: "ad" },
-    { cat: "MUTFAK & BANYO", urun: "Lavabo Açıcı", unit: "ad" },
-    { cat: "GENEL TEMİZLİK", urun: "Yüzey Temizleyici", unit: "ad" },
-    { cat: "GENEL TEMİZLİK", urun: "Cam Temizleyici", unit: "ad" },
-    { cat: "GENEL TEMİZLİK", urun: "Arap Sabunu", unit: "ad" },
-    { cat: "GENEL TEMİZLİK", urun: "Çok Amaçlı Sprey", unit: "ad" },
-    { cat: "GENEL TEMİZLİK", urun: "Temizlik Bezi", unit: "ad"},
-    { cat: "GENEL TEMİZLİK", urun: "Çöp Torbası", unit: "ad" },
-    { cat: "BANYO & HİJYEN", urun: "Şampuan", unit: "ad" },
-    { cat: "BANYO & HİJYEN", urun: "Saç Kremi", unit: "ad" },
-    { cat: "BANYO & HİJYEN", urun: "Duş Jeli", unit: "ad" },
-    { cat: "BANYO & HİJYEN", urun: "Sabun (Sıvı/Katı)", unit: "ad" },
-    { cat: "AĞIZ BAKIMI", urun: "Diş Macunu", unit: "ad" },
-    { cat: "AĞIZ BAKIMI", urun: "Diş Fırçası (Yedek)", unit: "ad" },
-    { cat: "AĞIZ BAKIMI", urun: "Ağız Çalkalama Suyu", unit: "ad" },
-    { cat: "AĞIZ BAKIMI", urun: "Diş İpi", unit: "ad" },
-    { cat: "KADIN HİJYEN", urun: "Hijyenik Ped", unit: "ad" },
-    { cat: "KADIN HİJYEN", urun: "Günlük Ped", unit: "ad" },
-    { cat: "EL, YÜZ & VÜCUT", urun: "El ve Vücut Kremi", unit: "ad" },
-    { cat: "EL, YÜZ & VÜCUT", urun: "Yüz Yıkama Jeli", unit: "ad" },
-    { cat: "EL, YÜZ & VÜCUT", urun: "Güneş Kremi", unit: "ad" },
-    { cat: "EL, YÜZ & VÜCUT", urun: "Dudak Nemlendiricisi", unit: "ad" },
-    { cat: "DEODORANT & PARFÜM", urun: "Deodorant / Roll-on", unit: "ad" },
-    { cat: "DEODORANT & PARFÜM", urun: "Parfüm / Vücut Spreyi", unit: "ad" },
-    { cat: "SAÇ BAKIM & ŞEKİL", urun: "Saç Köpüğü / Jöle", unit: "ad" },
-    { cat: "SAÇ BAKIM & ŞEKİL", urun: "Saç Boyası", unit: "ad" },
-    { cat: "KOZMETİK & MAKYAJ", urun: "Pamuk (Makyaj)", unit: "ad" },
-    { cat: "KOZMETİK & MAKYAJ", urun: "Makyaj Temizleme Suyu", unit: "ad" },
-    { cat: "KOZMETİK & MAKYAJ", urun: "Kulak Çubuğu", unit: "ad" },
-    { cat: "KOZMETİK & MAKYAJ", urun: "Aseton", unit: "ad" },
-    { cat: "TIRAŞ ÜRÜNLERİ", urun: "Tıraş Bıçağı", unit: "ad" },
-    { cat: "TIRAŞ ÜRÜNLERİ", urun: "Tıraş Köpüğü / Jeli", unit: "ad" },
-    { cat: "BEBEK", urun: "Bebek Bezi", unit: "ad" },
-    { cat: "BEBEK", urun: "Islak Mendil", unit: "ad" },
-    { cat: "BEBEK", urun: "Pişik Kremi", unit: "ad" },
-    { cat: "BANYO & TUVALET", urun: "Tuvalet Kağıdı", unit: "rulo" },
-    { cat: "MUTFAK & GENEL", urun: "Kağıt Havlu", unit: "rulo" },
-    { cat: "HİJYENİK KAĞITLAR", urun: "Kağıt Mendil", unit: "ad" },
-    { cat: "YARDIMCI KAĞITLAR", urun: "Pişirme Kağıdı", unit: "ad" },
-    { cat: "YARDIMCI KAĞITLAR", urun: "Buzdolabı Poşeti", unit: "ad" },
-    { cat: "YARDIMCI KAĞITLAR", urun: "Streç Film", unit: "ad" }
+    { cat: "BAKLİYAT & MAKARNA", urun: "Pirinç", unit: "kg"}, { cat: "BAKLİYAT & MAKARNA", urun: "Kırmızı Mercimek", unit: "kg" }, { cat: "BAKLİYAT & MAKARNA", urun: "Nohut", unit: "kg"}, { cat: "BAKLİYAT & MAKARNA", urun: "Kuru Fasulye", unit: "kg" }, { cat: "BAKLİYAT & MAKARNA", urun: "Pilavlık Bulgur", unit: "kg" }, { cat: "BAKLİYAT & MAKARNA", urun: "Köftelik Bulgur", unit: "kg" }, { cat: "BAKLİYAT & MAKARNA", urun: "Makarna (Spagetti)", unit: "ad" }, { cat: "BAKLİYAT & MAKARNA", urun: "Makarna (Burgu/Fiyonk)", unit: "ad" }, { cat: "BAKLİYAT & MAKARNA", urun: "Arpa Şehriye", unit: "ad"}, { cat: "BAKLİYAT & MAKARNA", urun: "Tel Şehriye", unit: "ad" }, { cat: "BAKLİYAT & MAKARNA", urun: "Salça", unit: "kg" }, { cat: "YAĞLAR", urun: "Ayçiçek Yağı(5lt)", unit: "ad"}, { cat: "YAĞLAR", urun: "Ayçiçek Yağı(1lt)", unit: "ad" }, { cat: "YAĞLAR", urun: "Zeytinyağı", unit: "lt" }, { cat: "YAĞLAR", urun: "Tereyağı", unit: "ad" }, { cat: "UN & ŞEKER", urun: "Buğday Unu", unit: "ad/kg" }, { cat: "UN & ŞEKER", urun: "Mısır Unu", unit: "ad" }, { cat: "UN & ŞEKER", urun: "Nişasta", unit: "ad" }, { cat: "UN & ŞEKER", urun: "Toz Şeker", unit: "ad/kg" }, { cat: "KAHVALTILIK", urun: "Peynir Çeşitleri", unit: "ad" }, { cat: "KAHVALTILIK", urun: "Zeytin (S/Y)", unit: "ad" }, { cat: "KAHVALTILIK", urun: "Yumurta", unit: "ad" }, { cat: "İÇECEK", urun: "Siyah Çay(1kg)", unit: "ad" }, { cat: "İÇECEK", urun: "Türk Kahvesi", unit: "ad" }, { cat: "İÇECEK", urun: "Filtre Kahve", unit: "ad" }, { cat: "İÇECEK", urun: "Granül Kahve", unit: "ad" }, { cat: "İÇECEK", urun: "Sade Maden Suyu", unit: "ad" }, { cat: "İÇECEK", urun: "Meyveli Maden Suyu", unit: "ad" }, { cat: "BAHARAT", urun: "Tuz(öğütülmüş)", unit: "ad"}, { cat: "BAHARAT", urun: "Tuz(iri taneli)", unit: "ad" }, { cat: "BAHARAT", urun: "Karabiber", unit: "ad"}, { cat: "BAHARAT", urun: "Pul Biber", unit: "ad"}, { cat: "BAHARAT", urun: "Kekik / Nane", unit: "ad" }, { cat: "BAHARAT", urun: "Kimyon / Sumak", unit: "ad"}, { cat: "BAHARAT", urun: "Zencefil/Zerdeçal", unit: "ad"}, { cat: "BAHARAT", urun: "Tarçın", unit: "ad" }, { cat: "BAHARAT", urun: "Susam", unit: "ad" }, { cat: "BAHARAT", urun: "Karanfil", unit: "ad" }, { cat: "BAHARAT", urun: "Çörek otu", unit: "ad" }, { cat: "ÇAMAŞIR", urun: "Toz Deterjan", unit: "ad/kg" }, { cat: "ÇAMAŞIR", urun: "Sıvı Deterjan", unit: "ad/lt" }, { cat: "ÇAMAŞIR", urun: "Yumuşatıcı", unit: "ad/lt" }, { cat: "ÇAMAŞIR", urun: "Renkli Koruyucu", unit: "ad/lt" }, { cat: "ÇAMAŞIR", urun: "Çamaşır Suyu", unit: "ad"}, { cat: "ÇAMAŞIR", urun: "Makine Temizleyici", unit: "ad" }, { cat: "BULAŞIK", urun: "Elde Yıkama Sıvısı", unit: "ad" }, { cat: "BULAŞIK", urun: "Parlatıcı", unit: "ad" }, { cat: "BULAŞIK", urun: "Bulaşık Makinesi Tuzu", unit: "ad" }, { cat: "BULAŞIK", urun: "Makine Tableti", unit: "ad"}, { cat: "BULAŞIK", urun: "Mutfak Süngeri / Tel", unit: "ad" }, { cat: "MUTFAK & BANYO", urun: "Yağ Çözücü Sprey", unit: "ad" }, { cat: "MUTFAK & BANYO", urun: "Banyo Çözücü Sprey", unit: "ad" }, { cat: "MUTFAK & BANYO", urun: "Cif / Krem", unit: "ad" }, { cat: "MUTFAK & BANYO", urun: "Lavabo Açıcı", unit: "ad" }, { cat: "GENEL TEMİZLİK", urun: "Yüzey Temizleyici", unit: "ad" }, { cat: "GENEL TEMİZLİK", urun: "Cam Temizleyici", unit: "ad" }, { cat: "GENEL TEMİZLİK", urun: "Arap Sabunu", unit: "ad" }, { cat: "GENEL TEMİZLİK", urun: "Çok Amaçlı Sprey", unit: "ad" }, { cat: "GENEL TEMİZLİK", urun: "Temizlik Bezi", unit: "ad"}, { cat: "GENEL TEMİZLİK", urun: "Çöp Torbası", unit: "ad" }, { cat: "BANYO & HİJYEN", urun: "Şampuan", unit: "ad" }, { cat: "BANYO & HİJYEN", urun: "Saç Kremi", unit: "ad" }, { cat: "BANYO & HİJYEN", urun: "Duş Jeli", unit: "ad" }, { cat: "BANYO & HİJYEN", urun: "Sabun (Sıvı/Katı)", unit: "ad" }, { cat: "AĞIZ BAKIMI", urun: "Diş Macunu", unit: "ad" }, { cat: "AĞIZ BAKIMI", urun: "Diş Fırçası (Yedek)", unit: "ad" }, { cat: "AĞIZ BAKIMI", urun: "Ağız Çalkalama Suyu", unit: "ad" }, { cat: "AĞIZ BAKIMI", urun: "Diş İpi", unit: "ad" }, { cat: "KADIN HİJYEN", urun: "Hijyenik Ped", unit: "ad" }, { cat: "KADIN HİJYEN", urun: "Günlük Ped", unit: "ad" }, { cat: "EL, YÜZ & VÜCUT", urun: "El ve Vücut Kremi", unit: "ad" }, { cat: "EL, YÜZ & VÜCUT", urun: "Yüz Yıkama Jeli", unit: "ad" }, { cat: "EL, YÜZ & VÜCUT", urun: "Güneş Kremi", unit: "ad" }, { cat: "EL, YÜZ & VÜCUT", urun: "Dudak Nemlendiricisi", unit: "ad" }, { cat: "DEODORANT & PARFÜM", urun: "Deodorant / Roll-on", unit: "ad" }, { cat: "DEODORANT & PARFÜM", urun: "Parfüm / Vücut Spreyi", unit: "ad" }, { cat: "SAÇ BAKIM & ŞEKİL", urun: "Saç Köpüğü / Jöle", unit: "ad" }, { cat: "SAÇ BAKIM & ŞEKİL", urun: "Saç Boyası", unit: "ad" }, { cat: "KOZMETİK & MAKYAJ", urun: "Pamuk (Makyaj)", unit: "ad" }, { cat: "KOZMETİK & MAKYAJ", urun: "Makyaj Temizleme Suyu", unit: "ad" }, { cat: "KOZMETİK & MAKYAJ", urun: "Kulak Çubuğu", unit: "ad" }, { cat: "KOZMETİK & MAKYAJ", urun: "Aseton", unit: "ad" }, { cat: "TIRAŞ ÜRÜNLERİ", urun: "Tıraş Bıçağı", unit: "ad" }, { cat: "TIRAŞ ÜRÜNLERİ", urun: "Tıraş Köpüğü / Jeli", unit: "ad" }, { cat: "BEBEK", urun: "Bebek Bezi", unit: "ad" }, { cat: "BEBEK", urun: "Islak Mendil", unit: "ad" }, { cat: "BEBEK", urun: "Pişik Kremi", unit: "ad" }, { cat: "BANYO & TUVALET", urun: "Tuvalet Kağıdı", unit: "rulo" }, { cat: "MUTFAK & GENEL", urun: "Kağıt Havlu", unit: "rulo" }, { cat: "HİJYENİK KAĞITLAR", urun: "Kağıt Mendil", unit: "ad" }, { cat: "YARDIMCI KAĞITLAR", urun: "Pişirme Kağıdı", unit: "ad" }, { cat: "YARDIMCI KAĞITLAR", urun: "Buzdolabı Poşeti", unit: "ad" }, { cat: "YARDIMCI KAĞITLAR", urun: "Streç Film", unit: "ad" }
 ];
 
-// LocalStorage kontrolü
 var savedData = localStorage.getItem('evEnvanter_vFinal');
 var storage = savedData ? JSON.parse(savedData) : defaultList;
-
-// Eksik verileri tamamla (ilk açılış için)
-for (var j = 0; j < storage.length; j++) {
-    if (storage[j].qty === undefined) storage[j].qty = 0;
-    if (storage[j].need === undefined) storage[j].need = false;
-}
 
 function init() {
     var list = document.getElementById('listBody');
     list.innerHTML = '';
     var lastCat = '';
-
-    // Kategorilere göre sırala
-    storage.sort(function(a, b) {
-        return categoryOrder.indexOf(a.cat) - categoryOrder.indexOf(b.cat);
-    });
+    storage.sort(function(a, b) { return categoryOrder.indexOf(a.cat) - categoryOrder.indexOf(b.cat); });
 
     for (var i = 0; i < storage.length; i++) {
         var item = storage[i];
-        
         if (item.cat !== lastCat) {
             var catRow = document.createElement('tr');
             catRow.className = 'cat-header';
@@ -232,106 +118,128 @@ function init() {
             list.appendChild(catRow);
             lastCat = item.cat;
         }
-
         var row = document.createElement('tr');
-        var statusText = item.need ? '⚠️ İHTİYAÇ VAR' : '✅ İHTİYAÇ DEĞİL';
-        var statusClass = item.need ? 'need-yes' : 'need-no';
+        var sCls = item.need ? 'need-yes' : 'need-no';
+        var sTxt = item.need ? '⚠️ İHTİYAÇ' : '✅ İHTİYAÇ DEĞİL';
         
-        row.innerHTML = '<td>' + item.urun + 
-            ' <button class="delete-btn" onclick="deleteProduct(' + i + ')">🗑️</button></td>' +
-            '<td>' + item.unit + '</td>' +
-            '<td><input type="number" step="0.1" value="' + item.qty + '" oninput="update(' + i + ', \'qty\', this.value)"></td>' +
-            '<td><span class="status-btn ' + statusClass + '" onclick="update(' + i + ', \'need\', ' + !item.need + ')">' + statusText + '</span></td>';
+        // Ondalıklı kısmı (step="0.1") kaldırıp tam sayıya sabitledik
+        row.innerHTML = '<td>' + item.urun + ' <button class="delete-btn" onclick="deleteItem(' + i + ')">🗑️</button></td><td>' + item.unit + '</td>' +
+            '<td><input type="number" value="' + (item.qty || 0) + '" oninput="update(' + i + ', \'qty\', this.value)"></td>' +
+            '<td><span class="status-btn ' + sCls + '" onclick="update(' + i + ', \'need\', ' + !item.need + ')">' + sTxt + '</span></td>';
         list.appendChild(row);
     }
 }
 
-function addNewProduct() {
-    var name = document.getElementById('newUrun').value;
-    var cat = document.getElementById('newCat').value;
-    var unit = document.getElementById('newUnit').value || 'ad';
-    
-    if (!name || name.trim() === "") { alert("Lütfen ürün adı girin!"); return; }
-
-    storage.push({ cat: cat, urun: name, unit: unit, qty: 0, need: false });
-    save();
-    document.getElementById('newUrun').value = '';
-    init();
+function update(i, k, v) {
+    // parseFloat yerine parseInt kullanarak ondalıklı kaydı engelledik
+    storage[i][k] = (k === 'qty') ? (parseInt(v) || 0) : v;
+    localStorage.setItem('evEnvanter_vFinal', JSON.stringify(storage));
+    if (k === 'need') init();
 }
 
-function update(i, key, val) {
-    if (key === 'qty') {
-        storage[i][key] = parseFloat(val) || 0;
-    } else {
-        storage[i][key] = val;
-    }
-    save();
-    if (key === 'need') init(); 
-}
-
-function deleteProduct(i) {
-    if (confirm(storage[i].urun + " silinsin mi?")) {
+function deleteItem(i) {
+    if(confirm(storage[i].urun + " silinsin mi?")) {
         storage.splice(i, 1);
-        save();
+        localStorage.setItem('evEnvanter_vFinal', JSON.stringify(storage));
         init();
     }
 }
 
-function save() {
-    localStorage.setItem('evEnvanter_vFinal', JSON.stringify(storage));
-}
-
-function filterProducts() {
-    var term = document.getElementById('searchInput').value.toLowerCase();
-    var rows = document.getElementById('listBody').getElementsByTagName('tr');
-    for (var i = 0; i < rows.length; i++) {
-        if (!rows[i].classList.contains('cat-header')) {
-            rows[i].style.display = rows[i].innerText.toLowerCase().indexOf(term) > -1 ? '' : 'none';
-        }
-    }
-}
-
-function showMissing() {
-    var missingText = "";
+function comparePrices() {
+    var content = document.getElementById('modal-content');
+    content.innerHTML = '';
+    document.getElementById('modal-footer-actions').innerHTML = '';
     var count = 0;
     for (var i = 0; i < storage.length; i++) {
         if (storage[i].need) {
             count++;
-            missingText += count + ". " + storage[i].urun + " (" + storage[i].qty + " " + storage[i].unit + " elinizde var)\n";
+            var div = document.createElement('div');
+            div.className = 'compare-row';
+            var encoded = encodeURIComponent(storage[i].urun);
+            div.innerHTML = '<span class="compare-product-name">' + storage[i].urun + '</span>' +
+                '<div class="compare-links">' +
+                '<a href="https://www.akakce.com/arama/?q=' + encoded + '" target="_blank" style="background:#be0000">Akakçe</a>' +
+                '<a href="https://www.cimri.com/arama?q=' + encoded + '" target="_blank" style="background:#ff6000">Cimri</a>' +
+                '<a href="https://www.migros.com.tr/arama?q=' + encoded + '" target="_blank" style="background:#ffb400">Migros</a>' +
+                '<a href="https://www.a101.com.tr/list/?search_text=' + encoded + '" target="_blank" style="background:#00adef">A101</a>' +
+                '<a href="https://www.sokmarket.com.tr/arama?q=' + encoded + '" target="_blank" style="background:#da251d">ŞOK</a>' +
+                '<a href="https://www.bim.com.tr/arama?q=' + encoded + '" target="_blank" style="background:#004a99">BİM</a>' +
+                '</div>';
+            content.appendChild(div);
         }
     }
-    document.getElementById('modal-content').innerText = missingText || "Harika! Hiç eksik ürünün yok.";
+    if (count === 0) content.innerHTML = '<p style="padding:20px; text-align:center;">Önce İHTİYAÇ işaretleyin.</p>';
+    document.getElementById('modal-title').innerText = "💰 Fiyat Karşılaştırma";
     document.getElementById('modal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
 }
 
-function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
+function showMissing() {
+    var txt = "";
+    for (var i = 0; i < storage.length; i++) {
+        if (storage[i].need) txt += "• " + storage[i].urun + " (" + (storage[i].qty || 0) + " " + storage[i].unit + ")\n";
+    }
+    document.getElementById('modal-title').innerText = "📝 Alınacaklar";
+    document.getElementById('modal-content').innerHTML = '<pre id="copyText" style="white-space:pre-wrap; font-family:inherit; padding:15px; background:#f4f4f4; border-radius:8px; font-size:14px;">' + (txt || "Eksik yok!") + '</pre>';
+    
+    document.getElementById('modal-footer-actions').innerHTML = 
+        '<div class="modal-action-btns">' +
+            '<button class="btn" style="background:var(--whatsapp); font-size:14px;" onclick="sendWA()">💬 WHATSAPP</button>' +
+            '<button class="btn" style="background:var(--copy); font-size:14px;" onclick="copyToClipboard()">📋 KOPYALA</button>' +
+        '</div>';
+
+    document.getElementById('modal').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
 }
 
-function copyText() {
-    var text = document.getElementById('modal-content').innerText;
+function copyToClipboard() {
+    var text = document.getElementById('copyText').innerText;
     var dummy = document.createElement("textarea");
     document.body.appendChild(dummy);
     dummy.value = text;
     dummy.select();
     document.execCommand("copy");
     document.body.removeChild(dummy);
-    alert("Eksik listesi kopyalandı!");
+    alert("Liste başarıyla kopyalandı!");
+}
+
+function sendWA() {
+    var txt = "*MARKET LİSTESİ*\n" + document.getElementById('copyText').innerText;
+    window.open("https://wa.me/?text=" + encodeURIComponent(txt));
+}
+
+function closeModal() { document.getElementById('modal').style.display = 'none'; document.getElementById('overlay').style.display = 'none'; }
+
+function filterProducts() {
+    var t = document.getElementById('searchInput').value.toLowerCase();
+    var rs = document.getElementById('listBody').getElementsByTagName('tr');
+    for (var i = 0; i < rs.length; i++) {
+        if (!rs[i].classList.contains('cat-header')) {
+            rs[i].style.display = rs[i].innerText.toLowerCase().indexOf(t) > -1 ? '' : 'none';
+        }
+    }
+}
+
+function addNewProduct() {
+    var n = document.getElementById('newUrun').value;
+    var c = document.getElementById('newCat').value;
+    var u = document.getElementById('newUnit').value || 'ad';
+    if (!n) return;
+    // Yeni ürünü varsayılan olarak "need: false" (İhtiyaç Değil) olarak ayarladık
+    storage.push({ cat: c, urun: n, unit: u, qty: 0, need: false });
+    localStorage.setItem('evEnvanter_vFinal', JSON.stringify(storage));
+    document.getElementById('newUrun').value = '';
+    init();
 }
 
 function exportExcel() {
-    var csv = "Kategori\tÜrün\tMiktar\tBirim\tDurum\n";
+    var csv = "Ürün\tBirim\tMiktar\tDurum\n";
     for (var i = 0; i < storage.length; i++) {
-        var m = storage[i];
-        csv += m.cat + "\t" + m.urun + "\t" + m.qty + "\t" + m.unit + "\t" + (m.need ? 'EKSİK' : 'TAMAM') + "\n";
+        csv += storage[i].urun + "\t" + storage[i].unit + "\t" + (storage[i].qty || 0) + "\t" + (storage[i].need ? "İhtiyaç" : "İhtiyaç Değil") + "\n";
     }
-    var blob = new Blob(['\ufeff' + csv], { type: 'application/vnd.ms-excel' });
+    var b = new Blob(['\ufeff' + csv], { type: 'application/vnd.ms-excel' });
     var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "Ev_Stok_Listesi.xls";
-    a.click();
+    a.href = URL.createObjectURL(b); a.download = "Stok_Listesi.xls"; a.click();
 }
 
 init();
